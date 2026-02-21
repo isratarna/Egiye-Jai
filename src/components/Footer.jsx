@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
 
             <p className="text-sm leading-relaxed max-w-[270px] mb-6">
-              Connecting compassionate people with meaningful causes since 2010.
+              Connecting compassionate people with meaningful causes since 2026.
               Together we've built a kinder, greener world.
             </p>
 
