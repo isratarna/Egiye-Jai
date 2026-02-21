@@ -10,8 +10,8 @@ const SUBJECTS = [
 ]
 
 const contactInfo = [
-  { icon: '📧', label: 'Email',   value: 'hello@EgiyeJai.org'          },
-  { icon: '📞', label: 'Phone',   value: '+1 (800) 555-HEART'            },
+  { icon: '📧', label: 'Email',   value: 'info@egiyejai.org'          },
+  { icon: '📞', label: 'Phone',   value: '+8801312345661'            },
   { icon: '📍', label: 'HQ',      value: '23 Green Lane, Gulshan, Dhaka' },
   { icon: '🕐', label: 'Hours',   value: 'Mon–Fri, 9 AM – 6 PM BST'     },
 ]
