@@ -112,33 +112,34 @@ export const volunteers = [
 // ─── Press / Featured On ─────────────────────────────────────────────────────
 export const pressLogos = [
   {
-    name: "BBC",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_logo_%282021%29.svg/1200px-BBC_logo_%282021%29.svg.png",
+    name: "Prothom Alo",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8f/Prothom_Alo_logo.svg/3840px-Prothom_Alo_logo.svg.png",
   },
   {
-    name: "Forbes",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Forbes_logo.svg/1200px-Forbes_logo.svg.png",
+    name: "BBC Bangla",
+    logo: "data:image/png;base64,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",
   },
   {
-    name: "The Guardian",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_Guardian_2018.svg/1200px-The_Guardian_2018.svg.png",
+    name: "Dhaka Tribune",
+    logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfghDTEavJz9-5H-ksUgMXYG1TtME7YXEOaw&shttps://epaper.dhakatribune.com/img/logo_small.pnghttps://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/The_Guardian_2018.svg/1200px-The_Guardian_2018.svg.png",
   },
   {
-    name: "TIME",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Time_Magazine_logo.svg/1200px-Time_Magazine_logo.svg.png",
+    name: "Jamuna Television",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jamuna_TV_logo.svg/1280px-Jamuna_TV_logo.svg.png",
   },
   {
-    name: "Reuters",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Reuters_logo.svg/1200px-Reuters_logo.svg.png",
+    name: "Jugantor",
+    logo: "https://cdn.jugantor.com/uploads/settings/default_img_1.jpg",
   },
 ];
+
 
 // ─── About section images ─────────────────────────────────────────────────────
 export const aboutImages = {
   // Pexels – group of volunteers
-  main: "https://images.pexels.com/photos/6647056/pexels-photo-6647056.jpeg?auto=compress&cs=tinysrgb&w=800",
+  main: "https://vbd.com.bd/images/2025/05/independence-day-2017-768x512jpg_1747656774.jpg",
   // Pexels – volunteer hands
-  secondary: "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=500",
+  secondary: "https://www.undp.org/sites/g/files/zskgke326/files/2025-04/undp_bd_anita_chakma.jpg",
 };
 
 // ─── Footer links ─────────────────────────────────────────────────────────────
@@ -153,9 +154,10 @@ export const donateBg =
   "https://images.pexels.com/photos/6995237/pexels-photo-6995237.jpeg?auto=compress&cs=tinysrgb&w=1600";
 
 export const donateImpact = {
-  10:  "meals for 3 families in need",
-  25:  "medicine for 10 people",
-  50:  "school supplies for 5 children",
-  100: "a full week of meals for a family",
+  badgeColor: "#bed5d0",
+  1000:  "meals for 3 families in need",
+  2500:  "medicine for 10 people",
+  5000:  "school supplies for 5 children",
+  10000: "a full week of meals for a family",
 };
 

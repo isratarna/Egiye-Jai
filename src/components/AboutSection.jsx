@@ -49,9 +49,9 @@ export default function AboutSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.35 }}
             >
-              🌍 Since 2010
+              🌍 Since 2026
               <br />
-              <span className="font-normal text-xs text-white/80">15 yrs of impact</span>
+              <span className="font-normal text-xs text-white/80"></span>
             </motion.div>
 
             {/* Decorative dots */}
@@ -84,7 +84,7 @@ export default function AboutSection() {
             className="text-warm-gray leading-relaxed mb-4"
             {...fadeUp(0.2)}
           >
-            Founded in 2010 by a small group of passionate changemakers,
+            Founded in 2026 by a small group of passionate changemakers,
             EgiyeJai began with a single food drive in Dhaka. Today, we're a
             domestic movement spanning 29 districts, connecting volunteers with the
             causes that matter most.
