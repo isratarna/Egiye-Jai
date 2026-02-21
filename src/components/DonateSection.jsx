@@ -27,7 +27,7 @@ export default function DonateSection() {
         ref={bgRef}
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `url("TK{donateBg}")`,
+          backgroundImage: `url("${donateBg}")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -128,10 +128,10 @@ export default function DonateSection() {
           </div>
 
           {/* Impact line */}
-          <p className="text-white/75 max-w-md mx-auto leading_relaxed mb-10">
+          <p className="text-white/75 max-w-md mx-auto leading-relaxed mb-10">
             ৳{displayAmount || 0}{' '}
             {freq !== 'once' ? `/ ${freq}` : ''} can{' '}
-            <strong className="text-white/75 max-w-md mx-auto leading_relaxed mb-10">{getImpact(displayAmount)}</strong>
+            <strong className="text-white/75 max-w-md mx-auto leading-relaxed mb-10">{getImpact(displayAmount)}</strong>
           </p>
 
           {/* CTA */}
