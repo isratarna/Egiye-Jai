@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-cream text-charcoal overflow-x-hidden;
+  }
+
+  ::selection {
+    @apply bg-teal-lt text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-cream;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-teal-lt rounded-full;
+  }
+}
+
+@layer components {
+  .section-badge {
+    @apply inline-block text-xs font-bold px-4 py-1.5 rounded-full tracking-widest uppercase mb-4;
+  }
+
+  .section-heading {
+    @apply font-serif text-charcoal leading-tight;
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+  }
+
+  .btn-primary {
+    @apply bg-teal text-white font-semibold rounded-full px-8 py-3.5 transition-all duration-300
+           hover:bg-teal-dk hover:shadow-lg-soft hover:-translate-y-0.5 cursor-pointer border-0 font-sans;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-2 border-teal text-teal font-semibold rounded-full px-8 py-3.5
+           transition-all duration-300 hover:bg-teal hover:text-white cursor-pointer font-sans;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl overflow-hidden shadow-soft transition-all duration-350;
+  }
+
+  .card:hover {
+    @apply -translate-y-2.5 shadow-lg-soft;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3.5 rounded-xl border-2 border-earth-lt bg-cream text-charcoal
+           font-sans text-sm transition-all duration-300 focus:outline-none focus:border-teal;
+  }
+}
+
+@layer utilities {
+  .duration-350 {
+    transition-duration: 350ms;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #3d8b7a, #5a8a4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .parallax-section {
+    will-change: transform;
+  }
+}
+
+/* Donate button pulse */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(61,139,122,0.45); }
+  70%  { box-shadow: 0 0 0 18px rgba(61,139,122,0); }
+  100% { box-shadow: 0 0 0 0 rgba(61,139,122,0); }
+}
+.pulse-btn {
+  animation: pulse-ring 2.6s ease-in-out infinite;
+}
+
+/* Feature logo filter */
+.press-logo {
+  filter: grayscale(1) opacity(0.45);
+  transition: filter 0.35s ease, transform 0.35s ease;
+}
+.press-logo:hover {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.08);
+}
