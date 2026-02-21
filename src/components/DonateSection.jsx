@@ -13,7 +13,7 @@ function getImpact(amount) {
 }
 
 export default function DonateSection() {
-  const [amount, setAmount]   = useState(50)
+  const [amount, setAmount]   = useState(1000)
   const [custom, setCustom]   = useState('')
   const [freq, setFreq]       = useState('monthly')
   const bgRef                 = useParallax(0.28)
@@ -128,10 +128,10 @@ export default function DonateSection() {
           </div>
 
           {/* Impact line */}
-          <p className="text-center text-warm-gray text-sm mb-6">
+          <p className="text-white/75 max-w-md mx-auto leading_relaxed mb-10">
             ৳{displayAmount || 0}{' '}
             {freq !== 'once' ? `/ ${freq}` : ''} can{' '}
-            <strong className="text-teal">{getImpact(displayAmount)}</strong>
+            <strong className="text-white/75 max-w-md mx-auto leading_relaxed mb-10">{getImpact(displayAmount)}</strong>
           </p>
 
           {/* CTA */}
@@ -147,7 +147,7 @@ export default function DonateSection() {
             </motion.button>
           </div>
 
-          <p className="text-center text-warm-gray text-xs mt-4">
+          <p className="text-white/75 max-w-md mx-auto leading_relaxed mb-10">
             🔒 Secure payment &nbsp;·&nbsp; Tax deductible &nbsp;·&nbsp; Cancel anytime
           </p>
         </motion.div>

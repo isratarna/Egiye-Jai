@@ -158,6 +158,6 @@ export const donateImpact = {
   1000:  "meals for 3 families in need",
   2500:  "medicine for 10 people",
   5000:  "school supplies for 5 children",
-  10000: "a full week of meals for a family",
+  10000: "a full month of meals for a family",
 };
 
