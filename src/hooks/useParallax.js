@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
 /**
- * useParallax – returns a ref to attach to a DOM element.
+ * useParallax - returns a ref to attach to a DOM element.
  * The element will translate on scroll at `speed` factor.
- * @param {number} speed – fraction of scroll offset (e.g. 0.2)
+ * @param {number} speed - fraction of scroll offset (e.g. 0.2)
  */
 export function useParallax(speed = 0.2) {
   const ref = useRef(null)
@@ -19,7 +19,7 @@ export function useParallax(speed = 0.2) {
     }
 
     window.addEventListener('scroll', handle, { passive: true })
-    handle() // initial position
+    handle()
     return () => window.removeEventListener('scroll', handle)
   }, [speed])
 
@@ -27,7 +27,7 @@ export function useParallax(speed = 0.2) {
 }
 
 /**
- * useAnimatedCounter – returns a display string that counts up to `target`.
+ * useAnimatedCounter - returns a display string that counts up to `target`.
  * Only starts when `inView` is true.
  */
 export function useAnimatedCounter(target, suffix = '', inView = false, duration = 1800) {
@@ -51,3 +51,4 @@ export function useAnimatedCounter(target, suffix = '', inView = false, duration
 
   return count.toLocaleString() + suffix
 }
+

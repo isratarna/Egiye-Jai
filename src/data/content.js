@@ -1,3 +1,11 @@
+﻿export const navItems = [
+  'Home',
+  'Report a Problem',
+  'Volunteer Opportunities',
+  'Organizations',
+  'About EgiyeJai',
+  'Contact',
+]
 // ─── Volunteering Opportunities ──────────────────────────────────────────────
 export const opportunities = [
   {
@@ -150,3 +158,4 @@ export const donateImpact = {
   50:  "school supplies for 5 children",
   100: "a full week of meals for a family",
 };
+
