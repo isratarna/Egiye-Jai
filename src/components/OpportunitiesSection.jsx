@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
-import {
+import { motion } from 'framer-motion' //motion.div, motion.img, motion.button use kora hoise animation er jonno
+import { //icons
   BarChart3,
   Bell,
   CheckCircle2,
@@ -16,7 +16,7 @@ import {
 import { useParallax } from '../hooks/useParallax'
 import { opportunities } from '../data/content'
 
-const reportFlow = [
+const reportFlow = [ //submit report flow steps ,
   {
     title: 'Submitted',
     subtitle: 'Citizen submits issue with location and evidence',
@@ -47,21 +47,21 @@ function OpportunityCard({ opp, index }) {
       className="card flex flex-col"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: 'easeOut' }}
-      whileHover={{ y: -12, boxShadow: '0 24px 64px rgba(61,139,122,0.2)' }}
+      viewport={{ once: true, margin: '-60px' }} // card e dhore rakhle j boro hoye jay 
+      transition={{ duration: 0.6, delay: index * 0.08, ease: 'easeOut' }} // jetay hover korre ber hobo shetay easeout effect lagbe, tai ease: 'easeOut' deya hoise, jate animation smooth hoy
+      whileHover={{ y: -12, boxShadow: '0 24px 64px rgba(61,139,122,0.2)' }} // card er upr hover korle upore uthbe
     >
       <div className="relative h-52 overflow-hidden">
         <motion.img
-          src={opp.img}
+          src={opp.img} //card er image section, relative rakhle tar vitorer absolute element tag, duration tar position er relative hoye jay
           alt={opp.title}
           className="w-full h-full object-cover"
           whileHover={{ scale: 1.08 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-        />
+        /> 
         <span
           className="absolute top-3 left-3 text-white text-xs font-bold px-3 py-1 rounded-full tracking-wide"
-          style={{ backgroundColor: opp.color }}
+          style={{ backgroundColor: opp.color }} // eta holo image er upr floating category tag, jeta card er data theke color nibe, jate prottek card er tag er color alada hoy
         >
           {opp.tag}
         </span>
@@ -91,14 +91,14 @@ function OpportunityCard({ opp, index }) {
 
 export default function OpportunitiesSection() {
   const blobRef = useParallax(0.15)
-  const [activePhase, setActivePhase] = useState(0)
+  const [activePhase, setActivePhase] = useState(0) 
 
-  useEffect(() => {
+  useEffect(() => { // reportt flow er jonno timer set kora hoise jeta prottek 2.6 second por active phase change korbe, jate live report flow er effect dekhte paoa jai
     const timer = setInterval(() => {
-      setActivePhase(prev => (prev + 1) % reportFlow.length)
+      setActivePhase(prev => (prev + 1) % reportFlow.length) 
     }, 2600)
 
-    return () => clearInterval(timer)
+    return () => clearInterval(timer) /// timer off, jate choltei na thake interval shesho
   }, [])
 
   return (
@@ -219,7 +219,7 @@ export default function OpportunitiesSection() {
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2.5 rounded-full bg-[#edf6f2] border border-[#d7e9e2] px-4 py-2 text-sm text-teal-dk font-medium">
                     <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-                    Live phase: {reportFlow[activePhase].title}
+                    Live phase: {reportFlow[activePhase].title}   
                   </div>
                 </div>
 
@@ -240,14 +240,14 @@ export default function OpportunitiesSection() {
                     className="absolute left-0 top-1/2 h-[2px] -translate-y-1/2 bg-gradient-to-r from-teal via-teal-lt to-green rounded-full"
                     initial={false}
                     animate={{
-                      width: `${(activePhase / (reportFlow.length - 1)) * 100}%`,
+                      width: `${(activePhase / (reportFlow.length - 1)) * 100}%`,  //horizontal progress bar report card er nicher
                     }}
                     transition={{ duration: 0.45, ease: 'easeOut' }}
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                  {reportFlow.map((step, i) => {
+                  {reportFlow.map((step, i) => { // card generate
                     const isActive = i === activePhase
                     const isCompleted = i < activePhase
                     const StepIcon = step.Icon
@@ -262,7 +262,7 @@ export default function OpportunitiesSection() {
                               ? 'bg-[#f0f8f4] border-[#cfe3db]'
                               : 'bg-cream/85 border-earth-lt'
                         }`}
-                        whileHover={{ y: -2 }}
+                        whileHover={{ y: -2 }} // hover korle upre uthbe report card
                         transition={{ duration: 0.2 }}
                       >
                         <div className="flex items-start gap-3">

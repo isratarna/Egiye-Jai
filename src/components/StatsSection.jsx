@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
+import { useInView } from 'react-intersection-observer' // scroll kore kono element viewport e ashle tar state track kore, jeta animation trigger korte use kora jay
 import { useParallax, useAnimatedCounter } from '../hooks/useParallax'
 import { stats } from '../data/content'
 
@@ -16,14 +16,14 @@ function StatCard({ stat, inView, index }) {
         border: '1px solid rgba(255,255,255,0.18)',
       }}
       initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      animate={inView ? { opacity: 1, y: 0 } : {}} // jodi inView true hoy slide up
       transition={{ duration: 0.65, delay: index * 0.12, ease: 'easeOut' }}
     >
       <div
         className="font-serif font-bold text-white leading-none mb-2"
         style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
       >
-        {display}
+        {display} {/*//counter er value*/}
       </div>
       <div className="text-white/75 text-sm tracking-wide">{stat.label}</div>
     </motion.div>
@@ -31,12 +31,12 @@ function StatCard({ stat, inView, index }) {
 }
 
 export default function StatsSection() {
-  const bgRef = useParallax(0.28)
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true })
+  const bgRef = useParallax(0.20) // background parallax, scroll e
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
 
   return (
     <section
-      ref={ref}
+      ref={ref} //observer er sathe link
       className="relative py-20 overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, #2a6357 0%, #3d8b7a 55%, #5a8a4a 100%)',
@@ -45,13 +45,13 @@ export default function StatsSection() {
       {/* Parallax photo overlay */}
       <div
         ref={bgRef}
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none" //click korle kisu hobena
         style={{
           backgroundImage:
-            'url("https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=1400")',
+            'url("https://www.ifrc.org/sites/default/files/styles/article_press_release_featured_image/public/2024-09/ea_cover_photo_cumilla_unit_img_6921_1-01_0.jpeg?itok=65z4uNE5")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          opacity: 0.07,
+          opacity: 0.2,
         }}
       />
 

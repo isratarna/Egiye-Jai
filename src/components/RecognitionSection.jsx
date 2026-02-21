@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react' // usestate componnet er state ar effect timer auto rotation eshob
+import { motion, AnimatePresence } from 'framer-motion' //motion for animation elemnt, presence holo jeshob elemnt ashe abar jay oder ashajawa hanfle kore
 import { useParallax } from '../hooks/useParallax'
 import { volunteers } from '../data/content'
 
 export default function RecognitionSection() {
-  const [active, setActive] = useState(0)
-  const blobRef = useParallax(0.2)
+  const [active, setActive] = useState(0) // eta diye track rakhe kon volunteer ekhon highlighted
+  const blobRef = useParallax(0.2) // ektu slow korte parallax effect diye blob ke scroll er sathe move korano
 
   // Auto-rotate every 5 s
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function RecognitionSection() {
     return () => clearInterval(t)
   }, [])
 
-  const vol = volunteers[active]
+  const vol = volunteers[active] // current volunteer data, jeta selector button click kore change hobe, ar auto-rotate o change korbe
 
   return (
     <section className="relative py-24 overflow-hidden bg-white">
@@ -63,7 +63,8 @@ export default function RecognitionSection() {
             {vol.badge}
           </span>
 
-          {/* Avatar */}
+          {/* Avatar * , animaete presence use kori element diassapear reappear howar shomoy j in and out hoy shetar jonno*/}
+          {/* jokhon wait mane 5 secdhore current ke dekachhe*/ }
           <AnimatePresence mode="wait">
             <motion.img
               key={vol.name + '-img'}
@@ -77,7 +78,7 @@ export default function RecognitionSection() {
             />
           </AnimatePresence>
 
-          {/* Quote */}
+          {/* Quote right to left animate korse so exit er somoy -20 x  */}
           <div className="flex-1 min-w-0">
             <AnimatePresence mode="wait">
               <motion.blockquote
@@ -92,7 +93,7 @@ export default function RecognitionSection() {
                 "{vol.quote}"
               </motion.blockquote>
             </AnimatePresence>
-
+            {/*volunteer er name role hours*/}
             <AnimatePresence mode="wait">
               <motion.div
                 key={vol.name + '-meta'}
