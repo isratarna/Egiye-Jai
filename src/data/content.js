@@ -1,4 +1,6 @@
-﻿export const navItems = [
+﻿
+
+export const navItems = [
   'Home',
   'Report a Problem',
   'Volunteer Opportunities',
@@ -94,9 +96,9 @@ export const volunteers = [
     hours: "320+",
     role: "Environmental Champion",
     quote: "We planted over 2,000 trees together. That's an entire forest born from friendship and shared purpose.",
-    img: "blob:https://web.whatsapp.com/4452d617-3fbd-49f4-bfd2-71139a0684ca",
+    img:  "https://avatars.githubusercontent.com/u/262960131?v=4",
     badge: "🌱 Green Hero",
-    badgeColor: "#5a8a4a",
+    badgeColor: "#1b201a",
   },
   {
     name: "Israt Jahan Arna",
@@ -154,7 +156,6 @@ export const donateBg =
   "https://images.pexels.com/photos/6995237/pexels-photo-6995237.jpeg?auto=compress&cs=tinysrgb&w=1600";
 
 export const donateImpact = {
-  badgeColor: "#bed5d0",
   1000:  "meals for 3 families in need",
   2500:  "medicine for 10 people",
   5000:  "school supplies for 5 children",

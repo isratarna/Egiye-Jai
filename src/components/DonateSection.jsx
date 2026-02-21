@@ -147,7 +147,7 @@ export default function DonateSection() {
             </motion.button>
           </div>
 
-          <p className="text-center text-warm-gray text-xs mt-4">
+          <p className="text-white/75 max-w-md mx-auto leading-relaxed mb-10">
             🔒 Secure payment &nbsp;·&nbsp; Tax deductible &nbsp;·&nbsp; Cancel anytime
           </p>
         </motion.div>
