@@ -330,14 +330,14 @@ export default function OpportunitiesSection() {
                     Live phase: {reportFlow[activePhase].title}
                   </div>
                 </div>
-                <motion.a
-                  href="mailto:complaints@egiyejai.org?subject=Social%20Problem%20Report"
-                  className="btn-primary !px-7 !py-3 text-sm sm:text-base no-underline whitespace-nowrap self-start lg:self-center"
+                <motion.button
+                  className="btn-primary !px-7 !py-3 text-sm sm:text-base whitespace-nowrap self-start lg:self-center"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
+                  onClick={() => navigate('/report-problem')}
                 >
                   Report a Problem
-                </motion.a>
+                </motion.button>
               </div>
 
               {/* Progress bar + phase cards */}

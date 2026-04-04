@@ -88,7 +88,10 @@ export default function HorizontalScroll() {
                 <button className="auth-button !px-6 !py-3 text-sm">
                   Make an Impact
                 </button>
-                <button className="inline-flex items-center gap-2 rounded-full border border-earth-lt/80 bg-earth/20 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-earth-lt hover:text-charcoal-deep">
+                <button 
+                  onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ&time_continue=2&source_ve_path=NzY3NTg&embeds_referring_euri=https%3A%2F%2Fwww.google.com%2Fsearch%3Fsca_esv%3Df4adb27807e92ea2%26rlz%3D1C1VDKB_enBD1072BD1074%26sxsrf%3DANbL-n7tPSh0n131zfKciODfsQO2FtTrCg%3A17752', '_blank', 'noopener,noreferrer')}
+                  className="inline-flex items-center gap-2 rounded-full border border-earth-lt/80 bg-earth/20 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-earth-lt hover:text-charcoal-deep"
+                >
                   <PlayCircle className="h-4 w-4" />
                   Watch Video
                 </button>
