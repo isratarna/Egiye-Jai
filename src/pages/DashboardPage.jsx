@@ -23,11 +23,12 @@ export default function DashboardPage() {
   const [applications, setApplications] = useState([])
   const [stats, setStats] = useState({})
   const [loading, setLoading] = useState(true)
+
+  // Edit / Avatar States
   const [editMode, setEditMode] = useState(false)
   const [editForm, setEditForm] = useState({})
   const [saving, setSaving] = useState(false)
   const [avatarUploading, setAvatarUploading] = useState(false)
-  const navigate = useNavigate()
 
   useEffect(() => {
     fetchProfile()
@@ -134,9 +135,8 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-4 gap-3">
               {[
-                { label: 'Volunteered', value: stats.approved || 0, icon: '✅' },
                 { label: 'Completed', value: stats.completed || 0, icon: '🏅' },
-                { label: 'Hours', value: stats.totalHours || 0, icon: '⏱️' },
+                { label: 'Hours', value: profile?.totalHours || 0, icon: '⏱️' },
                 { label: 'Badges', value: profile?.badges?.length || 0, icon: '🏆' },
               ].map(({ label, value, icon }) => (
                 <div key={label} className="bg-white/15 backdrop-blur rounded-2xl p-3 text-center text-white min-w-[70px]">

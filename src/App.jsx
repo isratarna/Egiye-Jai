@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import OpportunitiesPage from './pages/OpportunitiesPage'
+import ProblemsFeed from './pages/ProblemsFeed'
 import ContactPage from './pages/ContactPage'
 import DashboardPage from './pages/DashboardPage'
 import AdminLayout from './pages/admin/AdminLayout'
@@ -23,6 +24,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/opportunities" element={<OpportunitiesPage />} />
+          <Route path="/problems" element={<ProblemsFeed />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
           <Route path="/signup" element={<GuestRoute><SignupPage /></GuestRoute>} />

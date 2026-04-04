@@ -7,8 +7,6 @@ import RecognitionSection from '../components/RecognitionSection'
 import FeaturedOnSection from '../components/FeaturedOnSection'
 import AboutSection from '../components/AboutSection'
 import DonateSection from '../components/DonateSection'
-import ContactSection from '../components/ContactSection'
-
 export default function HomePage() {
   return (
     <main className="site-shell min-h-screen bg-cream text-charcoal">
@@ -22,7 +20,6 @@ export default function HomePage() {
       <FeaturedOnSection />
       <AboutSection />
       <DonateSection />
-      <ContactSection />
       <Footer />
     </main>
   )
