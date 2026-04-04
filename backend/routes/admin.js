@@ -4,6 +4,8 @@ const User = require('../models/User');
 const Opportunity = require('../models/Opportunity');
 const Application = require('../models/Application');
 const Contact = require('../models/Contact');
+const Problem = require('../models/Problem');
+const Notification = require('../models/Notification');
 const { protect, adminOnly } = require('../middleware/auth');
 
 // All admin routes require auth + admin role
@@ -138,6 +140,99 @@ router.get('/applications', async (req, res) => {
       .skip((page - 1) * limit)
       .limit(Number(limit));
     res.json({ success: true, applications, total });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// PATCH /api/admin/users/:id/manage - update hours, stats
+router.patch('/users/:id/manage', async (req, res) => {
+  try {
+    const { totalHours, badgeName, badgeIcon } = req.body;
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
+    
+    if (totalHours !== undefined) user.totalHours = totalHours;
+    
+    if (badgeName && badgeIcon) {
+      user.badges.push({ name: badgeName, icon: badgeIcon, earnedAt: new Date() });
+      // Notify user
+      await Notification.create({
+        user: user._id,
+        message: `You earned a new badge: ${badgeName}!`,
+        type: 'badge_earned'
+      });
+    }
+
+    await user.save();
+    res.json({ success: true, user: user.toPublic() });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// PATCH /api/admin/problems/:problemId/solutions/:solutionId/accept
+router.patch('/problems/:problemId/solutions/:solutionId/accept', async (req, res) => {
+  try {
+    const problem = await Problem.findById(req.params.problemId);
+    if (!problem) return res.status(404).json({ success: false, message: 'Problem not found' });
+
+    const solution = problem.solutions.id(req.params.solutionId);
+    if (!solution) return res.status(404).json({ success: false, message: 'Solution not found' });
+
+    solution.status = 'accepted';
+    problem.status = 'Resolved';
+    problem.isSolved = true;
+    await problem.save();
+    
+    // Notify the solver
+    const user = await User.findById(solution.solvedBy);
+    if (user) {
+      await Notification.create({
+        user: user._id,
+        message: `Your proof for "${problem.title}" was accepted!`,
+        type: 'proof_accepted',
+        link: `/problems/${problem._id}`
+      });
+    }
+
+    res.json({ success: true, problem });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// POST /api/admin/contact/:id/reply
+router.post('/contact/:id/reply', async (req, res) => {
+  try {
+    const { replyMessage } = req.body;
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ success: false, message: 'Contact not found' });
+
+    contact.repliedAt = new Date();
+    contact.isRead = true;
+    await contact.save();
+
+    // Check if user is associated
+    if (contact.user) {
+      await Notification.create({
+        user: contact.user,
+        message: `Admin replied to your message: "${contact.subject}"`,
+        type: 'admin_reply'
+      });
+    } else {
+      // Look up by email as fallback
+      const user = await User.findOne({ email: contact.email });
+      if (user) {
+        await Notification.create({
+          user: user._id,
+          message: `Admin replied to your message: "${contact.subject}"`,
+          type: 'admin_reply'
+        });
+      }
+    }
+
+    res.json({ success: true, message: 'Reply recorded' });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
