@@ -70,10 +70,29 @@ router.post('/:id/comment', protect, async (req, res) => {
 
     problem.comments.push({ user: req.user._id, text });
     await problem.save();
-
+    
     // Repopulate user info for comment
     await problem.populate('comments.user', 'name avatar');
     res.json({ success: true, comments: problem.comments });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Submit a solution
+router.post('/:id/solve', protect, async (req, res) => {
+  try {
+    const { proofImage, description } = req.body;
+    const problem = await Problem.findById(req.params.id);
+    if (!problem) return res.status(404).json({ success: false, message: 'Problem not found' });
+
+    problem.solutions.push({
+      solvedBy: req.user._id,
+      proofImage,
+      description
+    });
+    await problem.save();
+    res.json({ success: true, message: 'Solution submitted for review' });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
