@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import OpportunitiesPage from './pages/OpportunitiesPage'
 import ProblemsFeed from './pages/ProblemsFeed'
+import ReportProblemPage from './pages/ReportProblemPage'
 import ContactPage from './pages/ContactPage'
 import DashboardPage from './pages/DashboardPage'
 import AdminLayout from './pages/admin/AdminLayout'
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/opportunities" element={<OpportunitiesPage />} />
           <Route path="/problems" element={<ProblemsFeed />} />
+          <Route path="/report-problem" element={<ReportProblemPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<GuestRoute><LoginPage /></GuestRoute>} />
           <Route path="/signup" element={<GuestRoute><SignupPage /></GuestRoute>} />
