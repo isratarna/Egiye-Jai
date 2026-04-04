@@ -9,6 +9,10 @@ export default function AdminUsers() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
+  const [manageUser, setManageUser] = useState(null)
+  const [manageForm, setManageForm] = useState({ totalHours: 0, badgeName: '', badgeIcon: '' })
+  
+  const EMOJI_PRESETS = ['⭐', '🏆', '🏅', '🎖️', '🦸', '🌿', '🌍']
 
   useEffect(() => { fetchUsers() }, [])
 
@@ -45,6 +49,35 @@ export default function AdminUsers() {
     }
   }
 
+  const handleManageSave = async (e) => {
+    e.preventDefault()
+    try {
+      const payload = { 
+        totalHours: Number(manageForm.totalHours)
+      }
+      if (manageForm.badgeName && manageForm.badgeIcon) {
+        payload.badgeName = manageForm.badgeName;
+        payload.badgeIcon = manageForm.badgeIcon;
+      }
+      
+      const { data } = await api.patch(`/admin/users/${manageUser._id}/manage`, payload)
+      toast.success('User updated successfully')
+      setUsers(us => us.map(u => u._id === manageUser._id ? data.user : u))
+      setManageUser(null)
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Update failed')
+    }
+  }
+
+  const openManageModal = (u) => {
+    setManageUser(u)
+    setManageForm({ 
+      totalHours: u.totalHours || 0, 
+      badgeName: '', 
+      badgeIcon: '' 
+    })
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -77,7 +110,7 @@ export default function AdminUsers() {
             <table className="w-full text-sm">
               <thead className="bg-gray-50 border-b border-gray-100">
                 <tr>
-                  {['Volunteer', 'Location', 'Joined', 'Hours', 'Badges', 'Status', 'Actions'].map(h => (
+                  {['Volunteer', 'Location', 'Hours', 'Badges', 'Status', 'Actions'].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
@@ -97,7 +130,6 @@ export default function AdminUsers() {
                       </div>
                     </td>
                     <td className="px-4 py-3 text-gray-500 text-xs">{u.location || '—'}</td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">{new Date(u.createdAt).toLocaleDateString()}</td>
                     <td className="px-4 py-3 text-gray-700 font-semibold">{u.totalHours || 0}h</td>
                     <td className="px-4 py-3 text-gray-700">{u.badges?.length || 0}</td>
                     <td className="px-4 py-3">
@@ -107,6 +139,9 @@ export default function AdminUsers() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
+                        <button onClick={() => openManageModal(u)} title="Manage details" className="p-1.5 rounded-lg text-blue-600 hover:bg-blue-50 transition-colors">
+                          <Filter className="h-4 w-4" />
+                        </button>
                         <button onClick={() => toggleStatus(u._id)} title={u.isActive ? 'Suspend' : 'Activate'} className={`p-1.5 rounded-lg transition-colors ${u.isActive ? 'text-amber-600 hover:bg-amber-50' : 'text-green-600 hover:bg-green-50'}`}>
                           {u.isActive ? <UserX className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
                         </button>
@@ -134,6 +169,43 @@ export default function AdminUsers() {
               <button onClick={() => setDeleteId(null)} className="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">Cancel</button>
               <button onClick={handleDelete} className="flex-1 px-4 py-2 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700">Delete</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Manage User Modal */}
+      {manageUser && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-6 max-w-md w-full">
+            <h3 className="font-serif font-bold text-lg mb-4 text-gray-800">Manage {manageUser.name}</h3>
+            <form onSubmit={handleManageSave} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Total Hours</label>
+                <input type="number" min="0" value={manageForm.totalHours} onChange={e => setManageForm(prev => ({ ...prev, totalHours: e.target.value }))} className="w-full px-4 py-2 rounded-xl border border-gray-200 focus:outline-none focus:border-teal" />
+              </div>
+              <div className="p-4 bg-gray-50 rounded-xl space-y-3">
+                <p className="text-xs font-semibold text-gray-500 uppercase">Award New Badge</p>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Badge Icon (Emoji)</label>
+                  <div className="flex gap-2 mb-2 flex-wrap">
+                    {EMOJI_PRESETS.map(emoji => (
+                      <button type="button" key={emoji} onClick={() => setManageForm(prev => ({ ...prev, badgeIcon: emoji }))} className={`w-8 h-8 rounded-lg text-lg flex items-center justify-center transition-colors ${manageForm.badgeIcon === emoji ? 'bg-teal/20 border border-teal' : 'bg-white border border-gray-200 hover:bg-gray-100'}`}>
+                        {emoji}
+                      </button>
+                    ))}
+                  </div>
+                  <input type="text" placeholder="Or type a custom emoji here" maxLength={2} value={manageForm.badgeIcon} onChange={e => setManageForm(prev => ({ ...prev, badgeIcon: e.target.value }))} className="w-full px-3 py-1.5 rounded-lg border border-gray-200 focus:outline-none focus:border-teal text-sm" />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-600 mb-1">Badge Name</label>
+                  <input type="text" placeholder="e.g. Rising Star" value={manageForm.badgeName} onChange={e => setManageForm(prev => ({ ...prev, badgeName: e.target.value }))} className="w-full px-3 py-1.5 rounded-lg border border-gray-200 focus:outline-none focus:border-teal text-sm" />
+                </div>
+              </div>
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={() => setManageUser(null)} className="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50">Cancel</button>
+                <button type="submit" className="flex-1 px-4 py-2 rounded-xl bg-teal text-white text-sm font-semibold hover:bg-teal-dk">Save Changes</button>
+              </div>
+            </form>
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Briefcase, Users, ClipboardList, MessageSquare, Menu, X, LogOut, Shield, Leaf } from 'lucide-react'
+import { LayoutDashboard, Briefcase, Users, ClipboardList, MessageSquare, Menu, X, LogOut, Shield, Leaf, AlertTriangle } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 const navItems = [
@@ -9,6 +9,7 @@ const navItems = [
   { to: '/admin/users', label: 'Volunteers', icon: <Users className="h-5 w-5" /> },
   { to: '/admin/applications', label: 'Applications', icon: <ClipboardList className="h-5 w-5" /> },
   { to: '/admin/messages', label: 'Messages', icon: <MessageSquare className="h-5 w-5" /> },
+  { to: '/problems', label: 'Manage Problems', icon: <AlertTriangle className="h-5 w-5" /> },
 ]
 
 export default function AdminLayout() {
